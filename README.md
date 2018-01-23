@@ -12,7 +12,7 @@ The dataset I used came from [this repository](https://github.com/arahusky/Tenso
 
 ## Pitfalls
 
-To help others improve their effeciceny in implementing an FCN I've decided to list all of the pitfalls I fell into during this project.
+To help others in implementing their own FCN, I've decided to list all of the pitfalls I fell into during this project.
 
 ### 1. Class Imbalance
 
