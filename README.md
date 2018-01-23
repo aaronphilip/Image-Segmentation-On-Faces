@@ -1,4 +1,4 @@
-# Face Segmenter
+# Image Segmentation for Faces
 
 This is a Fully Convolutional Network built with Keras that is meant to segment faces. It is based of the VGG-16 architecture and implements one skip layer. It uses pretrained weights trained on the VGG-Face dataset. After about 10 hours of training on an NVIDIA GeForce GTX 1050 over 9 epochs, the model got to about 94% accuracy.
 
