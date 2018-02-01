@@ -10,6 +10,8 @@ Pre-trained weights were downloaded from <http://www.vlfeat.org/matconvnet/pretr
 
 The dataset I used came from [this repository](https://github.com/arahusky/Tensorflow-Segmentation). It is a modified form of the [lfw part labels](http://vis-www.cs.umass.edu/lfw/part_labels/) dataset.
 
+Unfortunately, this version of the dataset contains suboptimal labels. Future plans are to use the full lfw part labels dataset, which should drastically improve performance of the model.
+
 ## Pitfalls
 
 To help others in implementing their own FCN, I've decided to list all of the pitfalls I ran into during this project.
