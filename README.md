@@ -1,4 +1,4 @@
-# Image Segmentation for Faces
+# Image Segmentation on Faces
 
 This is a Fully Convolutional Network built with Keras that is meant to segment faces. It is based of the VGG-16 architecture and implements one skip layer. It uses pretrained weights trained on the VGG-Face dataset. After about 10 hours of training on an NVIDIA GeForce GTX 1050 over 9 epochs, the model got to about 94% accuracy.
 
@@ -10,13 +10,19 @@ Pre-trained weights were downloaded from <http://www.vlfeat.org/matconvnet/pretr
 
 The dataset I used came from [this repository](https://github.com/arahusky/Tensorflow-Segmentation). It is a modified form of the [lfw part labels](http://vis-www.cs.umass.edu/lfw/part_labels/) dataset.
 
+Unfortunately, this version of the dataset contains suboptimal labels. Future plans are to use the full lfw part labels dataset, which should drastically improve performance of the model.
+
 ## Pitfalls
 
 To help others in implementing their own FCN, I've decided to list all of the pitfalls I ran into during this project.
 
 ### 1. Class Imbalance
 
-Most of the labels have about a 1/4 ratio of face to background pixels. As a result, my network would classify every pixel as a 0 and remained stuck at about 80% accuracy. To resolve this issue, I used Keras's class_weight parameter for model.fit(). In order to not get the error `ValueError: 'class_weight' must contain all classes in the data.` you need to follow [these instructions](https://stackoverflow.com/questions/48254832/keras-class-weight-in-multi-label-binary-classification) which tell you to set `y_train[:,0] = 0` and `y_train[:,1] = 1`. Also, I used a lambda layer with `K.squeeze` to remove the unnecessary last dimension of the output. If you need class weights for more than two classes then follow [these instructions](https://github.com/keras-team/keras/issues/3653), which describe how to use sample_weight.
+Most of the labels have about a 1/4 ratio of face to background pixels. As a result, my network would classify every pixel as a 0, causing it to remain stuck at about 80% accuracy. To resolve this issue, I used Keras's `class_weight` parameter for `model.fit()`. 
+
+In order to not get the error `ValueError: 'class_weight' must contain all classes in the data.`, you need to follow [these instructions](https://stackoverflow.com/questions/48254832/keras-class-weight-in-multi-label-binary-classification) which tell you to set `y_train[:,0] = 0` and `y_train[:,1] = 1`. If you need class weights for 3+ dimensional output tensors then follow [these instructions](https://github.com/keras-team/keras/issues/3653), which describe how to use `sample_weight`.
+
+To remove the unnecessary last dimension of the output I used a lambda layer with `K.squeeze`. 
 
 ### 2. LeakyReLU not ReLU
 
