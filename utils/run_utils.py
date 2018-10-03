@@ -1,4 +1,3 @@
-from scipy.io import loadmat
 from keras.preprocessing.image import ImageDataGenerator
 from keras.optimizers import SGD
 from PIL import Image
