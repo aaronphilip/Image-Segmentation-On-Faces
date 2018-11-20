@@ -2,6 +2,7 @@ from utils.model import model
 import utils.run_utils as utils
 import argparse
 import glob
+import os
 
 parser = argparse.ArgumentParser(description='Train an FCN')
 parser.add_argument('imgs', help='path to training images')
@@ -11,11 +12,15 @@ parser.add_argument('-e', '--epochs', type=int, help='Number of epochs (10 by de
 args = parser.parse_args()
 
 img_dir_path = args.imgs
+img_dir_name =  os.path.basename(os.path.normpath(img_dir_path))
+
 label_dir_path = args.labels
+label_dir_name = os.path.basename(os.path.normpath(label_dir_path))
+
 epochs = args.epochs
 
-imgs = glob.glob(img_dir_path + '/' + img_dir_path + '/*')
-labels = glob.glob(label_dir_path + '/' + label_dir_path + '/*')
+imgs = glob.glob(img_dir_path + '/' + img_dir_name + '/*')
+labels = glob.glob(label_dir_path + '/' + label_dir_name + '/*')
 
 if len(imgs) != len(labels):
     raise ValueError('Error: Different number of images and labels')
